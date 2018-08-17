@@ -27,7 +27,7 @@ struct coordinate
 	int y;
 	int moveNum;
 
-	void print()
+	void print() // For debugging info.
 	{
 		std::cout << "coordinate X: " << x << std::endl;
 		std::cout << "coordinate Y: " << y << std::endl;
@@ -57,9 +57,9 @@ void generateRandomGrid(std::vector<std::vector<std::string>>& grid, const int &
 {
 	std::random_device rd;
 	std::mt19937 mt(rd());
-	enum CharType { BLANK = 1, WALL = 2 };
-	int randRangeMin = CharType::BLANK;
-	int randRangeMax = CharType::WALL;
+	enum NodeType { BLANK = 1, WALL = 2 };
+	int randRangeMin = NodeType::BLANK;
+	int randRangeMax = NodeType::WALL;
 
 	for (int colN = 0; colN < cols; colN++)
 	{
@@ -77,11 +77,11 @@ void generateRandomGrid(std::vector<std::vector<std::string>>& grid, const int &
 			{
 				std::uniform_int_distribution<int> dist(randRangeMin, randRangeMax);
 				int typeToPlace = dist(mt);
-				if (typeToPlace == CharType::BLANK)
+				if (typeToPlace == NodeType::BLANK)
 				{
 					grid[colN][rowN] = "X";
 				}
-				else if (typeToPlace == CharType::WALL)
+				else if (typeToPlace == NodeType::WALL)
 				{
 					grid[colN][rowN] = "_";
 				}
